@@ -1,0 +1,90 @@
+entity Department {
+	departmentName String unique required,
+}
+
+/**
+ * The Employee entity.
+ */
+entity Employee {
+	/**
+	* The firstname attribute.
+	*/
+	firstName String required,
+	lastName String required,
+	email String required,
+	phoneNumber String pattern(/^[(][0-9]{3}[)][-][0-9]{3}[-][0-9]{4}$/),
+
+}
+
+entity Blog{
+name String required minlength(3),
+handle String required minlength(2)
+}
+
+entity Post{
+title String required,
+content TextBlob required,
+date Instant required
+}
+
+entity Tag{
+name String required minlength(2)
+}
+
+enum JobLevel{
+Tier_1, Tier_2, Tier_3, Tier_4, Tier_5
+}
+
+entity Job {
+	jobTitle String required,
+	
+}
+
+
+entity Salary{
+joblevel JobLevel unique required,
+salary Long
+
+}
+
+
+
+
+// defining multiple OneToMany relationships with comments
+relationship OneToMany {
+	/**
+	* A relationship
+	*/
+	Department to
+	/**
+	* Another side of the same relationship
+	*/
+	Employee{department(departmentName)}
+
+	Job to Employee{job(jobTitle)}
+    Salary to Employee{joblevel(joblevel)}
+}
+
+relationship ManyToOne {
+
+	Employee{manager(firstName)} to Employee
+    Blog{user(login)} to User
+    Post{blog(name)} to Blog
+}
+
+relationship ManyToMany{
+Post{tag(name)} to Tag{entry}
+}
+
+
+// Set pagination options
+paginate Employee, Post, Tag with infinite-scroll
+paginate Job with pagination
+
+// Use Data Transfer Objects (DTO)
+// dto * with mapstruct
+
+// Set service options to all
+service all with serviceImpl
+
+
