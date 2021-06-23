@@ -1,0 +1,69 @@
+{
+  "name": "Employee",
+  "fields": [
+    {
+      "fieldName": "firstName",
+      "fieldType": "String",
+      "javadoc": "The firstname attribute.",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "lastName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "phoneNumber",
+      "fieldType": "String",
+      "fieldValidateRules": ["pattern"],
+      "fieldValidateRulesPattern": "^[(][0-9]{3}[)][-][0-9]{3}[-][0-9]{4}$"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "employee",
+      "otherEntityRelationshipName": "employee",
+      "relationshipName": "manager",
+      "otherEntityField": "firstName"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "department",
+      "otherEntityRelationshipName": "employee",
+      "javadoc": "Another side of the same relationship",
+      "relationshipName": "department",
+      "otherEntityField": "departmentName"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "job",
+      "otherEntityRelationshipName": "employee",
+      "relationshipName": "job",
+      "otherEntityField": "jobTitle"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "salary",
+      "otherEntityRelationshipName": "employee",
+      "relationshipName": "joblevel",
+      "otherEntityField": "joblevel"
+    }
+  ],
+  "javadoc": "The Employee entity.",
+  "entityTableName": "employee",
+  "dto": "no",
+  "pagination": "infinite-scroll",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210622145743"
+}

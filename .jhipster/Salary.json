@@ -1,0 +1,33 @@
+{
+  "name": "Salary",
+  "fields": [
+    {
+      "fieldName": "joblevel",
+      "fieldType": "JobLevel",
+      "fieldValues": "Tier_1,Tier_2,Tier_3,Tier_4,Tier_5",
+      "fieldValidateRules": ["unique", "required"]
+    },
+    {
+      "fieldName": "salary",
+      "fieldType": "Long"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "employee",
+      "otherEntityRelationshipName": "joblevel",
+      "relationshipName": "employee"
+    }
+  ],
+  "entityTableName": "salary",
+  "dto": "no",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210622145748"
+}

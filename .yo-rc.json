@@ -42,6 +42,8 @@
     "devServerPort": 4200,
     "clientPackageManager": "npm",
     "clientThemeVariant": "",
-    "languages": ["en"]
+    "languages": ["en"],
+    "entities": ["Department", "Employee", "Blog", "Post", "Tag", "Job", "Salary"],
+    "lastLiquibaseTimestamp": 1624373868000
   }
 }

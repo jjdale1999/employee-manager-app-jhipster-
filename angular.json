@@ -109,6 +109,7 @@
   },
   "defaultProject": "employee-managerfinal",
   "cli": {
+    "analytics": false,
     "packageManager": "npm"
   }
 }

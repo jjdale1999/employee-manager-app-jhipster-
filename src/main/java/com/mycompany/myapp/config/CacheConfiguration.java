@@ -48,6 +48,18 @@ public class CacheConfiguration {
             createCache(cm, com.mycompany.myapp.domain.User.class.getName());
             createCache(cm, com.mycompany.myapp.domain.Authority.class.getName());
             createCache(cm, com.mycompany.myapp.domain.User.class.getName() + ".authorities");
+            createCache(cm, com.mycompany.myapp.domain.Department.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.Department.class.getName() + ".employees");
+            createCache(cm, com.mycompany.myapp.domain.Employee.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.Blog.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.Post.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.Post.class.getName() + ".tags");
+            createCache(cm, com.mycompany.myapp.domain.Tag.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.Tag.class.getName() + ".entries");
+            createCache(cm, com.mycompany.myapp.domain.Job.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.Job.class.getName() + ".employees");
+            createCache(cm, com.mycompany.myapp.domain.Salary.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.Salary.class.getName() + ".employees");
             // jhipster-needle-ehcache-add-entry
         };
     }
