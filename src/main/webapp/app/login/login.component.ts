@@ -12,7 +12,7 @@ import { AccountService } from 'app/core/auth/account.service';
 export class LoginComponent implements OnInit, AfterViewInit {
   @ViewChild('username', { static: false })
   username!: ElementRef;
-
+  defaultpwd = 'password';
   authenticationError = false;
 
   loginForm = this.fb.group({
@@ -53,7 +53,11 @@ export class LoginComponent implements OnInit, AfterViewInit {
           this.authenticationError = false;
           if (!this.router.getCurrentNavigation()) {
             // There were no routing during login (eg from navigationToStoredUrl)
-            this.router.navigate(['']);
+            if (this.loginForm.get('password')!.value === this.defaultpwd) {
+              this.router.navigate(['/account/password']);
+            } else {
+              this.router.navigate(['']);
+            }
           }
         },
         () => (this.authenticationError = true)
