@@ -30,103 +30,85 @@
   </div>
 
   <div class="table-responsive" id="entities" *ngIf="employees && employees.length > 0">
-    <table class="table table-striped" aria-describedby="page-heading">
-      <thead>
-        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
-          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="firstName">
-            <span jhiTranslate="employeeManagerfinalApp.employee.firstName">First Name</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col" jhiSortBy="lastName">
-            <span jhiTranslate="employeeManagerfinalApp.employee.lastName">Last Name</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col" jhiSortBy="email">
-            <span jhiTranslate="employeeManagerfinalApp.employee.email">Email</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col" jhiSortBy="phoneNumber">
-            <span jhiTranslate="employeeManagerfinalApp.employee.phoneNumber">Phone Number</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col" jhiSortBy="manager.firstName">
-            <span jhiTranslate="employeeManagerfinalApp.employee.manager">Manager</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col" jhiSortBy="department.departmentName">
-            <span jhiTranslate="employeeManagerfinalApp.employee.department">Department</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col" jhiSortBy="job.jobTitle">
-            <span jhiTranslate="employeeManagerfinalApp.employee.job">Job</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th *jhiHasAnyAuthority="'ROLE_ADMIN'" scope="col" jhiSortBy="joblevel.joblevel">
-            <span jhiTranslate="employeeManagerfinalApp.employee.joblevel">Joblevel</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col"></th>
-        </tr>
-      </thead>
-      <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
-        <tr *ngFor="let employee of employees; trackBy: trackId" data-cy="entityTable">
-          <td>
-            <a [routerLink]="['/employee', employee.id, 'view']">{{ employee.id }}</a>
-          </td>
-          <td>{{ employee.firstName }}</td>
-          <td>{{ employee.lastName }}</td>
-          <td>{{ employee.email }}</td>
-          <td>{{ employee.phoneNumber }}</td>
-          <td>
-            <div *ngIf="employee.manager">
-              <a [routerLink]="['/employee', employee.manager?.id, 'view']">{{ employee.manager?.firstName }}</a>
+    <div jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
+      <a scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></a>
+      <a scope="col" jhiSortBy="firstName">
+        <span jhiTranslate="employeeManagerfinalApp.employee.firstName">First Name</span> <fa-icon icon="sort"></fa-icon>
+      </a>
+      <a scope="col" jhiSortBy="lastName">
+        <span jhiTranslate="employeeManagerfinalApp.employee.lastName">Last Name</span> <fa-icon icon="sort"></fa-icon>
+      </a>
+      <a scope="col" jhiSortBy="email">
+        <span jhiTranslate="employeeManagerfinalApp.employee.email">Email</span> <fa-icon icon="sort"></fa-icon>
+      </a>
+      <a scope="col" jhiSortBy="phoneNumber">
+        <span jhiTranslate="employeeManagerfinalApp.employee.phoneNumber">Phone Number</span> <fa-icon icon="sort"></fa-icon>
+      </a>
+      <a scope="col" jhiSortBy="manager.firstName">
+        <span jhiTranslate="employeeManagerfinalApp.employee.manager">Manager</span> <fa-icon icon="sort"></fa-icon>
+      </a>
+      <a scope="col" jhiSortBy="department.departmentName">
+        <span jhiTranslate="employeeManagerfinalApp.employee.department">Department</span> <fa-icon icon="sort"></fa-icon>
+      </a>
+      <a scope="col" jhiSortBy="job.jobTitle">
+        <span jhiTranslate="employeeManagerfinalApp.employee.job">Job</span> <fa-icon icon="sort"></fa-icon>
+      </a>
+      <a *jhiHasAnyAuthority="'ROLE_ADMIN'" scope="col" jhiSortBy="joblevel.joblevel">
+        <span jhiTranslate="employeeManagerfinalApp.employee.joblevel">Joblevel</span> <fa-icon icon="sort"></fa-icon>
+      </a>
+      <a scope="col"></a>
+    </div>
+    <div
+      class="row"
+      infinite-scroll
+      (scrolled)="loadPage(page + 1)"
+      [infiniteScrollDisabled]="page >= links['last']"
+      [infiniteScrollDistance]="0"
+    >
+      <div *ngFor="let employee of employees; trackBy: trackId" data-cy="entityTable">
+        <div class="sec_container mr-2">
+          <div class="card2 card3">
+            <div class="imgBx" type="submit" [routerLink]="['/employee', employee.id, 'view']" data-cy="entityDetailsButton">
+              <!-- <img src="{{employee?.imageUrl}}" > -->
             </div>
-          </td>
-          <td>
-            <div *ngIf="employee.department">
-              <a [routerLink]="['/department', employee.department?.id, 'view']">{{ employee.department?.departmentName }}</a>
-            </div>
-          </td>
-          <td>
-            <div *ngIf="employee.job">
-              <a [routerLink]="['/job', employee.job?.id, 'view']">{{ employee.job?.jobTitle }}</a>
-            </div>
-          </td>
-          <td *jhiHasAnyAuthority="'ROLE_ADMIN'">
-            <div *ngIf="employee.joblevel">
-              <a [routerLink]="['/salary', employee.joblevel?.id, 'view']">{{ employee.joblevel?.joblevel }}</a>
-            </div>
-          </td>
-          <td class="text-right">
-            <div class="btn-group">
-              <button
-                type="submit"
-                [routerLink]="['/employee', employee.id, 'view']"
-                class="btn btn-info btn-sm"
-                data-cy="entityDetailsButton"
-              >
-                <fa-icon icon="eye"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-              </button>
+            <div class="contentBx">
+              <h3 class="" style="color: yellow">{{ employee.firstName }} {{ employee.lastName }}</h3>
+              <h6 class="text-white font-weight-light">{{ employee.job?.jobTitle }}</h6>
+              <div class="size">
+                <h3 href="" class="mb-0 link-primary text-primary">
+                  <i class="fa fa-envelope" style="font-size: 15px; color: white"></i> {{ employee.email }}
+                </h3>
+              </div>
+              <div class="size">
+                <h3><i class="fa fa-phone" style="font-size: 20px; color: white"></i> {{ employee.phoneNumber }}</h3>
+              </div>
+              <div class="Actions">
+                <a
+                  *jhiHasAnyAuthority="'ROLE_ADMIN'"
+                  type="submit"
+                  [routerLink]="['/employee', employee.id, 'edit']"
+                  class="btn btn-primary btn-sm"
+                  data-cy="entityEditButton"
+                >
+                  <fa-icon icon="pencil-alt"></fa-icon>
+                  <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                </a>
 
-              <button
-                *jhiHasAnyAuthority="'ROLE_ADMIN'"
-                type="submit"
-                [routerLink]="['/employee', employee.id, 'edit']"
-                class="btn btn-primary btn-sm"
-                data-cy="entityEditButton"
-              >
-                <fa-icon icon="pencil-alt"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-              </button>
-
-              <button
-                *jhiHasAnyAuthority="'ROLE_ADMIN'"
-                type="submit"
-                (click)="delete(employee)"
-                class="btn btn-danger btn-sm"
-                data-cy="entityDeleteButton"
-              >
-                <fa-icon icon="times"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-              </button>
+                <a
+                  *jhiHasAnyAuthority="'ROLE_ADMIN'"
+                  type="submit"
+                  (click)="delete(employee)"
+                  class="btn btn-danger btn-sm"
+                  data-cy="entityDeleteButton"
+                >
+                  <fa-icon icon="times"></fa-icon>
+                  <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                </a>
+              </div>
             </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
