@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
             if (this.loginForm.get('password')!.value === this.defaultpwd) {
               this.router.navigate(['/account/password']);
             } else {
-              this.router.navigate(['']);
+              this.router.navigate(['/employee']);
             }
           }
         },

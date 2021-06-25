@@ -40,34 +40,40 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let blog of blogs; trackBy: trackId" data-cy="entityTable">
-          <td>
-            <a [routerLink]="['/blog', blog.id, 'view']">{{ blog.id }}</a>
-          </td>
-          <td>{{ blog.name }}</td>
-          <td>{{ blog.handle }}</td>
-          <td>
-            {{ blog.user?.login }}
-          </td>
-          <td class="text-right">
-            <div class="btn-group">
-              <button type="submit" [routerLink]="['/blog', blog.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
-                <fa-icon icon="eye"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-              </button>
+        <div class="card" *ngFor="let blog of blogs; trackBy: trackId" data-cy="entityTable">
+          <!-- the actual blog post: title/author/date/content -->
+          <h1>
+            <a [routerLink]="['/blog', blog.id, 'view']">{{ blog.name }}</a>
+          </h1>
+          <p class="lead">
+            <i class="fa fa-user"></i> by <a href="">{{ blog.user?.login }} @{{ blog.handle }}</a>
+          </p>
+          <hr />
+          <p><i class="fa fa-calendar"></i> Posted on August 24, 2014 at 9:00 PM</p>
+          <p>
+            <i class="fa fa-tags"></i> Tags: <a href=""><span class="badge badge-info">Bootstrap</span></a>
+            <a href=""><span class="badge badge-info">Web</span></a> <a href=""><span class="badge badge-info">CSS</span></a>
+            <a href=""><span class="badge badge-info">HTML</span></a>
+          </p>
 
-              <button type="submit" [routerLink]="['/blog', blog.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
-                <fa-icon icon="pencil-alt"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-              </button>
+          <hr />
+          <div class="btn-group">
+            <button type="submit" [routerLink]="['/blog', blog.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+              <fa-icon icon="eye"></fa-icon>
+              <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+            </button>
 
-              <button type="submit" (click)="delete(blog)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
-                <fa-icon icon="times"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-              </button>
-            </div>
-          </td>
-        </tr>
+            <button type="submit" [routerLink]="['/blog', blog.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+              <fa-icon icon="pencil-alt"></fa-icon>
+              <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+
+            <button type="submit" (click)="delete(blog)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+              <fa-icon icon="times"></fa-icon>
+              <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+            </button>
+          </div>
+        </div>
       </tbody>
     </table>
   </div>
