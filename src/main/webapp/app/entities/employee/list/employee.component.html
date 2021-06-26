@@ -69,7 +69,7 @@
         <div class="sec_container mr-2">
           <div class="card2 card3">
             <div class="imgBx" type="submit" [routerLink]="['/employee', employee.id, 'view']" data-cy="entityDetailsButton">
-              <img src="{{ employee.imageUrl }}" />
+              <img src="{{ employee?.imageUrl }}" />
             </div>
             <div class="contentBx">
               <h3 class="" style="color: yellow">{{ employee.firstName }} {{ employee.lastName }}</h3>
