@@ -45,7 +45,7 @@ public class Employee implements Serializable {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @Column(name = "image_url", nullable = false)
+    @Column(name = "image_url")
     private String imageUrl;
 
     @ManyToOne
@@ -121,19 +121,6 @@ public class Employee implements Serializable {
         this.email = email;
     }
 
-    public String getImageUrl() {
-        return this.imageUrl;
-    }
-
-    public Employee imageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-        return this;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
     public String getPhoneNumber() {
         return this.phoneNumber;
     }
@@ -145,6 +132,19 @@ public class Employee implements Serializable {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getImageUrl() {
+        return this.imageUrl;
+    }
+
+    public Employee imageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+        return this;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public Employee getManager() {
@@ -227,6 +227,7 @@ public class Employee implements Serializable {
             ", lastName='" + getLastName() + "'" +
             ", email='" + getEmail() + "'" +
             ", phoneNumber='" + getPhoneNumber() + "'" +
+            ", imageUrl='" + getImageUrl() + "'" +
             "}";
     }
 }

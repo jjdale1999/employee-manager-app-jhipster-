@@ -26,6 +26,7 @@ describe('Service Tests', () => {
         lastName: 'AAAAAAA',
         email: 'AAAAAAA',
         phoneNumber: 'AAAAAAA',
+        imageUrl: 'AAAAAAA',
       };
     });
 
@@ -65,6 +66,7 @@ describe('Service Tests', () => {
             lastName: 'BBBBBB',
             email: 'BBBBBB',
             phoneNumber: 'BBBBBB',
+            imageUrl: 'BBBBBB',
           },
           elemDefault
         );
@@ -84,6 +86,7 @@ describe('Service Tests', () => {
             lastName: 'BBBBBB',
             email: 'BBBBBB',
             phoneNumber: 'BBBBBB',
+            imageUrl: 'BBBBBB',
           },
           new Employee()
         );
@@ -107,6 +110,7 @@ describe('Service Tests', () => {
             lastName: 'BBBBBB',
             email: 'BBBBBB',
             phoneNumber: 'BBBBBB',
+            imageUrl: 'BBBBBB',
           },
           elemDefault
         );
@@ -158,7 +162,7 @@ describe('Service Tests', () => {
         });
 
         it('should add only unique Employee to an array', () => {
-          const employeeArray: IEmployee[] = [{ id: 123 }, { id: 456 }, { id: 61116 }];
+          const employeeArray: IEmployee[] = [{ id: 123 }, { id: 456 }, { id: 88639 }];
           const employeeCollection: IEmployee[] = [{ id: 123 }];
           expectedResult = service.addEmployeeToCollectionIfMissing(employeeCollection, ...employeeArray);
           expect(expectedResult).toHaveLength(3);

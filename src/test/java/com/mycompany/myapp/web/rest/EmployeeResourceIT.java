@@ -41,6 +41,9 @@ class EmployeeResourceIT {
     private static final String DEFAULT_PHONE_NUMBER = "(604)-882-8100";
     private static final String UPDATED_PHONE_NUMBER = "(341)-534-7578";
 
+    private static final String DEFAULT_IMAGE_URL = "AAAAAAAAAA";
+    private static final String UPDATED_IMAGE_URL = "BBBBBBBBBB";
+
     private static final String ENTITY_API_URL = "/api/employees";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
@@ -69,7 +72,8 @@ class EmployeeResourceIT {
             .firstName(DEFAULT_FIRST_NAME)
             .lastName(DEFAULT_LAST_NAME)
             .email(DEFAULT_EMAIL)
-            .phoneNumber(DEFAULT_PHONE_NUMBER);
+            .phoneNumber(DEFAULT_PHONE_NUMBER)
+            .imageUrl(DEFAULT_IMAGE_URL);
         return employee;
     }
 
@@ -84,7 +88,8 @@ class EmployeeResourceIT {
             .firstName(UPDATED_FIRST_NAME)
             .lastName(UPDATED_LAST_NAME)
             .email(UPDATED_EMAIL)
-            .phoneNumber(UPDATED_PHONE_NUMBER);
+            .phoneNumber(UPDATED_PHONE_NUMBER)
+            .imageUrl(UPDATED_IMAGE_URL);
         return employee;
     }
 
@@ -110,6 +115,7 @@ class EmployeeResourceIT {
         assertThat(testEmployee.getLastName()).isEqualTo(DEFAULT_LAST_NAME);
         assertThat(testEmployee.getEmail()).isEqualTo(DEFAULT_EMAIL);
         assertThat(testEmployee.getPhoneNumber()).isEqualTo(DEFAULT_PHONE_NUMBER);
+        assertThat(testEmployee.getImageUrl()).isEqualTo(DEFAULT_IMAGE_URL);
     }
 
     @Test
@@ -196,7 +202,8 @@ class EmployeeResourceIT {
             .andExpect(jsonPath("$.[*].firstName").value(hasItem(DEFAULT_FIRST_NAME)))
             .andExpect(jsonPath("$.[*].lastName").value(hasItem(DEFAULT_LAST_NAME)))
             .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL)))
-            .andExpect(jsonPath("$.[*].phoneNumber").value(hasItem(DEFAULT_PHONE_NUMBER)));
+            .andExpect(jsonPath("$.[*].phoneNumber").value(hasItem(DEFAULT_PHONE_NUMBER)))
+            .andExpect(jsonPath("$.[*].imageUrl").value(hasItem(DEFAULT_IMAGE_URL)));
     }
 
     @Test
@@ -214,7 +221,8 @@ class EmployeeResourceIT {
             .andExpect(jsonPath("$.firstName").value(DEFAULT_FIRST_NAME))
             .andExpect(jsonPath("$.lastName").value(DEFAULT_LAST_NAME))
             .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL))
-            .andExpect(jsonPath("$.phoneNumber").value(DEFAULT_PHONE_NUMBER));
+            .andExpect(jsonPath("$.phoneNumber").value(DEFAULT_PHONE_NUMBER))
+            .andExpect(jsonPath("$.imageUrl").value(DEFAULT_IMAGE_URL));
     }
 
     @Test
@@ -236,7 +244,12 @@ class EmployeeResourceIT {
         Employee updatedEmployee = employeeRepository.findById(employee.getId()).get();
         // Disconnect from session so that the updates on updatedEmployee are not directly saved in db
         em.detach(updatedEmployee);
-        updatedEmployee.firstName(UPDATED_FIRST_NAME).lastName(UPDATED_LAST_NAME).email(UPDATED_EMAIL).phoneNumber(UPDATED_PHONE_NUMBER);
+        updatedEmployee
+            .firstName(UPDATED_FIRST_NAME)
+            .lastName(UPDATED_LAST_NAME)
+            .email(UPDATED_EMAIL)
+            .phoneNumber(UPDATED_PHONE_NUMBER)
+            .imageUrl(UPDATED_IMAGE_URL);
 
         restEmployeeMockMvc
             .perform(
@@ -254,6 +267,7 @@ class EmployeeResourceIT {
         assertThat(testEmployee.getLastName()).isEqualTo(UPDATED_LAST_NAME);
         assertThat(testEmployee.getEmail()).isEqualTo(UPDATED_EMAIL);
         assertThat(testEmployee.getPhoneNumber()).isEqualTo(UPDATED_PHONE_NUMBER);
+        assertThat(testEmployee.getImageUrl()).isEqualTo(UPDATED_IMAGE_URL);
     }
 
     @Test
@@ -342,6 +356,7 @@ class EmployeeResourceIT {
         assertThat(testEmployee.getLastName()).isEqualTo(DEFAULT_LAST_NAME);
         assertThat(testEmployee.getEmail()).isEqualTo(DEFAULT_EMAIL);
         assertThat(testEmployee.getPhoneNumber()).isEqualTo(DEFAULT_PHONE_NUMBER);
+        assertThat(testEmployee.getImageUrl()).isEqualTo(DEFAULT_IMAGE_URL);
     }
 
     @Test
@@ -360,7 +375,8 @@ class EmployeeResourceIT {
             .firstName(UPDATED_FIRST_NAME)
             .lastName(UPDATED_LAST_NAME)
             .email(UPDATED_EMAIL)
-            .phoneNumber(UPDATED_PHONE_NUMBER);
+            .phoneNumber(UPDATED_PHONE_NUMBER)
+            .imageUrl(UPDATED_IMAGE_URL);
 
         restEmployeeMockMvc
             .perform(
@@ -378,6 +394,7 @@ class EmployeeResourceIT {
         assertThat(testEmployee.getLastName()).isEqualTo(UPDATED_LAST_NAME);
         assertThat(testEmployee.getEmail()).isEqualTo(UPDATED_EMAIL);
         assertThat(testEmployee.getPhoneNumber()).isEqualTo(UPDATED_PHONE_NUMBER);
+        assertThat(testEmployee.getImageUrl()).isEqualTo(UPDATED_IMAGE_URL);
     }
 
     @Test

@@ -22,6 +22,7 @@
       "lastName": "Last Name",
       "email": "Email",
       "phoneNumber": "Phone Number",
+      "imageUrl": "Image Url",
       "manager": "Manager",
       "department": "Department",
       "job": "Job",

@@ -13,13 +13,7 @@ import { IJob } from 'app/entities/job/job.model';
 import { JobService } from 'app/entities/job/service/job.service';
 import { ISalary } from 'app/entities/salary/salary.model';
 import { SalaryService } from 'app/entities/salary/service/salary.service';
-import { RegisterService } from 'app/account/register/register.service';
 
-import { Registration } from 'app/account/register/register.model';
-import { EMAIL_ALREADY_USED_TYPE, LOGIN_ALREADY_USED_TYPE } from 'app/config/error.constants';
-import { HttpErrorResponse } from '@angular/common/http';
-
-import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'jhi-employee-update',
   templateUrl: './employee-update.component.html',
@@ -31,11 +25,6 @@ export class EmployeeUpdateComponent implements OnInit {
   departmentsSharedCollection: IDepartment[] = [];
   jobsSharedCollection: IJob[] = [];
   salariesSharedCollection: ISalary[] = [];
-  doNotMatch = false;
-  error = false;
-  errorEmailExists = false;
-  errorUserExists = false;
-  success = false;
 
   editForm = this.fb.group({
     id: [],
@@ -43,6 +32,7 @@ export class EmployeeUpdateComponent implements OnInit {
     lastName: [null, [Validators.required]],
     email: [null, [Validators.required]],
     phoneNumber: [null, [Validators.pattern('^[(][0-9]{3}[)][-][0-9]{3}[-][0-9]{4}$')]],
+    imageUrl: [],
     manager: [],
     department: [],
     job: [],
@@ -53,8 +43,6 @@ export class EmployeeUpdateComponent implements OnInit {
     protected employeeService: EmployeeService,
     protected departmentService: DepartmentService,
     protected jobService: JobService,
-    protected registerService: RegisterService,
-    protected translateService: TranslateService,
     protected salaryService: SalaryService,
     protected activatedRoute: ActivatedRoute,
     protected fb: FormBuilder
@@ -79,15 +67,6 @@ export class EmployeeUpdateComponent implements OnInit {
       this.subscribeToSaveResponse(this.employeeService.update(employee));
     } else {
       this.subscribeToSaveResponse(this.employeeService.create(employee));
-
-      // creating account for the employee
-      const login = this.editForm.get(['firstName'])!.value;
-      const email = this.editForm.get(['email'])!.value;
-      const password = 'password'; // default password
-      this.registerService.save({ login, email, password, langKey: this.translateService.currentLang }).subscribe(
-        () => (this.success = true),
-        response => this.processError(response)
-      );
     }
   }
 
@@ -133,6 +112,7 @@ export class EmployeeUpdateComponent implements OnInit {
       lastName: employee.lastName,
       email: employee.email,
       phoneNumber: employee.phoneNumber,
+      imageUrl: employee.imageUrl,
       manager: employee.manager,
       department: employee.department,
       job: employee.job,
@@ -193,20 +173,11 @@ export class EmployeeUpdateComponent implements OnInit {
       lastName: this.editForm.get(['lastName'])!.value,
       email: this.editForm.get(['email'])!.value,
       phoneNumber: this.editForm.get(['phoneNumber'])!.value,
+      imageUrl: this.editForm.get(['imageUrl'])!.value,
       manager: this.editForm.get(['manager'])!.value,
       department: this.editForm.get(['department'])!.value,
       job: this.editForm.get(['job'])!.value,
       joblevel: this.editForm.get(['joblevel'])!.value,
     };
-  }
-
-  private processError(response: HttpErrorResponse): void {
-    if (response.status === 400 && response.error.type === LOGIN_ALREADY_USED_TYPE) {
-      this.errorUserExists = true;
-    } else if (response.status === 400 && response.error.type === EMAIL_ALREADY_USED_TYPE) {
-      this.errorEmailExists = true;
-    } else {
-      this.error = true;
-    }
   }
 }

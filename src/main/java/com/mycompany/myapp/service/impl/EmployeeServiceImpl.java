@@ -52,6 +52,9 @@ public class EmployeeServiceImpl implements EmployeeService {
                     if (employee.getPhoneNumber() != null) {
                         existingEmployee.setPhoneNumber(employee.getPhoneNumber());
                     }
+                    if (employee.getImageUrl() != null) {
+                        existingEmployee.setImageUrl(employee.getImageUrl());
+                    }
 
                     return existingEmployee;
                 }
