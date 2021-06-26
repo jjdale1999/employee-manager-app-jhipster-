@@ -45,6 +45,9 @@ public class Employee implements Serializable {
     @Column(name = "phone_number")
     private String phoneNumber;
 
+    @Column(name = "image_url", nullable = false)
+    private String imageUrl;
+
     @ManyToOne
     @JsonIgnoreProperties(value = { "manager", "department", "job", "joblevel" }, allowSetters = true)
     private Employee manager;
@@ -116,6 +119,19 @@ public class Employee implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getImageUrl() {
+        return this.imageUrl;
+    }
+
+    public Employee imageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+        return this;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public String getPhoneNumber() {

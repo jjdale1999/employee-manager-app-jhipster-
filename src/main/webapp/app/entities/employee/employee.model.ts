@@ -7,6 +7,7 @@ export interface IEmployee {
   firstName?: string;
   lastName?: string;
   email?: string;
+  imageUrl?: string;
   phoneNumber?: string | null;
   manager?: IEmployee | null;
   department?: IDepartment | null;
@@ -20,6 +21,7 @@ export class Employee implements IEmployee {
     public firstName?: string,
     public lastName?: string,
     public email?: string,
+    public imageUrl?: string,
     public phoneNumber?: string | null,
     public manager?: IEmployee | null,
     public department?: IDepartment | null,

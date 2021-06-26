@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/auth/account.model';
@@ -21,7 +22,12 @@ export class PasswordComponent implements OnInit {
     confirmPassword: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(50)]],
   });
 
-  constructor(private passwordService: PasswordService, private accountService: AccountService, private fb: FormBuilder) {}
+  constructor(
+    private passwordService: PasswordService,
+    private accountService: AccountService,
+    private fb: FormBuilder,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.account$ = this.accountService.identity();
@@ -40,6 +46,8 @@ export class PasswordComponent implements OnInit {
         () => (this.success = true),
         () => (this.error = true)
       );
+
+      this.router.navigate(['/employee']);
     }
   }
 }

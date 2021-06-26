@@ -52,6 +52,11 @@
         </div>
 
         <div class="form-group">
+          <label class="form-control-label" for="field_imageurl">Image Url</label>
+          <input type="text" class="form-control" name="imageurl" id="field_imageurl" data-cy="imageurl" formControlName="imageurl" />
+        </div>
+
+        <div class="form-group">
           <label class="form-control-label" jhiTranslate="employeeManagerfinalApp.employee.email" for="field_email">Email</label>
           <input type="text" class="form-control" name="email" id="field_email" data-cy="email" formControlName="email" />
           <div *ngIf="editForm.get('email')!.invalid && (editForm.get('email')!.dirty || editForm.get('email')!.touched)">

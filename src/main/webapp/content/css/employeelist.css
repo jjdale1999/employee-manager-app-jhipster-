@@ -161,7 +161,7 @@
   transition: 0.5s;
 }
 
-.container .card2:hover .imgBx {
+.sec_container .card2:hover .imgBx {
   top: 0%;
   transform: translateY(0%);
   z-index: 10;
@@ -251,7 +251,7 @@
   cursor: pointer;
 }
 
-.container .card2 .contentBx .size span:hover {
+.sec_container .card2 .contentBx .size span:hover {
   background: #9bdc28;
 }
 
@@ -264,7 +264,7 @@
   cursor: pointer;
 }
 
-.container .card2 .contentBx .color span:nth-child(2) {
+.sec_container .card2 .contentBx .color span:nth-child(2) {
   background: #9bdc28;
 }
 
