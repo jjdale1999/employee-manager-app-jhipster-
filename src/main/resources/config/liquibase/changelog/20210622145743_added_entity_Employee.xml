@@ -23,6 +23,9 @@
             <column name="email" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
+            <column name="image_url" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
             <column name="phone_number" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
